@@ -11,11 +11,12 @@ before_install:
 - export WEBRTC_RELEASE=true
 install:
 - uname -a 
+- dance
 before_script:
 - git config --global user.name 'Chen, Zai-Chun'
 - git config --global user.email 'chenzaichun@gmail.com'
 script:
-- dance
+- echo "haha"
 after_success:
 - git checkout -b release
 - git add "libWebRTC_objc" -A
