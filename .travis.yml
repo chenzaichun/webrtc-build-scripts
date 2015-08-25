@@ -8,7 +8,7 @@ before_install:
 - export PATH=`pwd`/depot_tools:"$PATH"
 - mkdir webrtc_ios && cd webrtc_ios
 - export GYP_DEFINES="OS=ios"
-- fetch --no-history webrtc_ios
+- fetch --no-history --verbose webrtc_ios
 #- npm install -g "git+https://github.com/chenzaichun/hexo.git#2.8.3"
 #- source ios/build.sh
 #- export WEBRTC_DEBUG=true
