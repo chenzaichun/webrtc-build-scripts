@@ -1,0 +1,23 @@
+sudo: false
+language: objective-c
+branches:
+  only:
+  - master
+before_install:
+#- npm install -g "git+https://github.com/chenzaichun/hexo.git#2.8.3"
+- source ios/build.sh
+#- export WEBRTC_DEBUG=true
+#- export WEBRTC_PROFILE=true 
+- export WEBRTC_RELEASE=true
+install:
+- uname -a 
+before_script:
+- git config --global user.name 'Chen, Zai-Chun'
+- git config --global user.email 'chenzaichun@gmail.com'
+script:
+- dance
+after_success:
+- git checkout -b release
+- git add "libWebRTC_objc" -A
+- git commit -m "releases"
+- git push -q -u origin release
