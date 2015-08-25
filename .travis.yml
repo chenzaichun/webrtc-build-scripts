@@ -4,21 +4,33 @@ branches:
   only:
   - master
 before_install:
+- git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+- export PATH=`pwd`/depot_tools:"$PATH"
+- mkdir webrtc_ios && cd webrtc_ios
+- export GYP_DEFINES="OS=ios"
+- fetch webrtc_ios
 #- npm install -g "git+https://github.com/chenzaichun/hexo.git#2.8.3"
-- source ios/build.sh
+#- source ios/build.sh
 #- export WEBRTC_DEBUG=true
 #- export WEBRTC_PROFILE=true 
-- export WEBRTC_RELEASE=true
+#- export WEBRTC_RELEASE=true
 install:
-- uname -a 
-- dance
+#- uname -a 
+#- dance
+- export GYP_CROSSCOMPILE=1
+- export GYP_DEFINES="OS=ios target_arch=arm"
+- export GYP_GENERATOR_FLAGS="output_dir=out_ios"
+- export GYP_GENERATORS=ninja
+
 before_script:
 - git config --global user.name 'Chen, Zai-Chun'
 - git config --global user.email 'chenzaichun@gmail.com'
 script:
-- echo "haha"
+#- echo "haha"
+- ninja -C out_ios/Release-iphoneos AppRTCDemo
 after_success:
-- git checkout -b release
-- git add "libWebRTC_objc" -A
-- git commit -m "releases"
-- git push -q -u origin release
+#- git checkout -b release
+#- git add "libWebRTC_objc" -A
+#- git commit -m "releases"
+#- git push -q -u origin release
+- echo "haha"
